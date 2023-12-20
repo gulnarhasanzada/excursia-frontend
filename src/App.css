@@ -1,0 +1,27 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import './colors.module.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+  
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', 'Tahoma', sans-serif;
+    font-size: 1em;
+}
+
+.button{
+    background-color: var(--primary-red)
+}
+.general-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+  
+.main-container {
+    flex: 1;
+    width: 90%;
+    margin:0 auto;
+}
