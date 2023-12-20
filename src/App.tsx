@@ -1,16 +1,17 @@
 import './App.css';
-import Footer from './components/footer/footer';
-import Header from './components/header/header';
+import {RouterProvider, createBrowserRouter} from "react-router-dom";
+import HomePage from './pages/HomePage';
+import Layout from './pages/Layout';
 
-function App(props: any) {
-  return (<div className="general-container">
-  <Header/>
-  <main className="main-container">
-      {props.children}
-  </main> 
-  <Footer/>
-</div>
-  );
+const router = createBrowserRouter([
+  {path: "/", element: <Layout/>, children: [
+      {path: "/", element: <HomePage/>}
+   ]
+  }
+]);
+
+function App() {
+  return (<RouterProvider router={router} />);
 }
 
 export default App;
