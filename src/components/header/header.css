@@ -1,3 +1,5 @@
+@import '../../colors.module.css';
+
 .header-container{
     border-bottom: 1px solid var(--primary-grey);
 }
@@ -10,4 +12,22 @@
 .header-item{
     width: 33%;
     padding: 30px 0 15px 100px;
+}
+
+.header-auth{
+    text-align: right;
+    padding-right: 100px;
+    margin-top:15px;
+}
+
+.auth-icon{
+    color: var(--icon-color);
+    margin:0 7px 8px 40px;
+
+}
+
+.auth-link{
+    color: var(--text-color);
+    text-decoration: none;
+    margin-top: 30px;
 }
