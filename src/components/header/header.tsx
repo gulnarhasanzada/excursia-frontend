@@ -14,8 +14,8 @@ const Header = ()=>{
 
                 </div>
                 <div className="header-item header-auth">       
-                    <Link to="/login" className="auth-link login"><FaUserCircle size="23" className="auth-icon"/>Login</Link>
-                    <Link to="/signup" className="auth-link signup"><FaUserPlus size="23" className="auth-icon"/>Signup</Link>
+                    <Link to="/auth?mode=login" className="auth-link login"><FaUserCircle size="23" className="auth-icon"/>Login</Link>
+                    <Link to="/auth?mode=signup" className="auth-link signup"><FaUserPlus size="23" className="auth-icon"/>Signup</Link>
                 </div>
             </div>
         </header>

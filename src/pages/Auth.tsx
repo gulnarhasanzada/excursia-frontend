@@ -42,12 +42,9 @@ export async function action({ request, params }: { request: Request, params: an
             email: data.get('email'),
             password: data.get('password')
         }
-        console.log(authData)
     }else{
         throw json({message: "Unsupportted mode." },{status: 422})
     }
-
-    console.log(authData)
     
     const response = await fetch(API_URL+ "/user/" + mode, {
         method: 'POST',

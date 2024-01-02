@@ -22,7 +22,12 @@ body {
     width: 80%;
     margin:0 auto;
 }
-
 .button{
     background-color: var(--primary-red) !important
+}
+
+.error-message{
+    font-size: 0.8rem;
+    color: var(--primary-red);
+    margin-top: -1.5rem;
 }

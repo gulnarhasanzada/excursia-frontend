@@ -2,9 +2,15 @@ import { Button, TextField } from "@mui/material";
 import MuiPhoneNumber, { MuiPhoneNumberProps } from "mui-phone-number";
 import "./Signup.css"
 import { useState } from "react";
-import { Form, Link} from 'react-router-dom';
+import { Form, Link,  useActionData,  useNavigation} from 'react-router-dom';
+import ErrorMessage from "../../util/ErrorMessage";
 
 const Signup = ()=>{
+  const navigation = useNavigation();
+  const data: any = useActionData();
+  console.log(data)
+  const isSubmitting = navigation.state === "submitting";
+
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [firstnameErr, setFirstnameErr] = useState<string>("");
   const [lastnameErr, setLastnameErr] = useState<string>("");
@@ -18,7 +24,6 @@ const Signup = ()=>{
   }
   
   return (<>
-    {error && <div className="alert alert-danger" role="alert">{error}</div>}
     <Form method="post">
       <TextField required
                 id="standard-basic"
@@ -26,8 +31,8 @@ const Signup = ()=>{
                 variant="standard"
                 className="input-field mb-4"
                 name="firstName"
-                helperText={firstnameErr}
       />
+      {data && <ErrorMessage errors={data.errors.firstName}/>}
     
       <TextField required
                 id="standard-basic"
@@ -35,8 +40,8 @@ const Signup = ()=>{
                 variant="standard"
                 className="input-field  mb-4"
                 name="lastName"
-                helperText={lastnameErr}
       />
+      {data && <ErrorMessage errors={data.errors.lastName}/>}
 
       <TextField required
                 id="standard-basic"
@@ -44,9 +49,8 @@ const Signup = ()=>{
                 variant="standard"
                 className="input-field mb-4"
                 name="email"
-                type="email"
-                helperText={emailErr}
       />
+      {data && <ErrorMessage errors={data.errors.email}/>}
 
       <TextField required
                 id="standard-basic"
@@ -55,8 +59,8 @@ const Signup = ()=>{
                 className="input-field mb-4"
                 name="password"
                 type="password"
-                helperText={passwordErr}
       />
+      {data && <ErrorMessage errors={data.errors.password}/>}
       
       <MuiPhoneNumber required 
                       id="outlined-required" 
@@ -65,12 +69,13 @@ const Signup = ()=>{
                       name="phoneNumber"
                       onChange={handleOnChange}
                       className="input-field mb-4"
-                      helperText={phoneErr}
       />
+      {data && <ErrorMessage errors={data.errors.phoneNumber}/>}
       
       <Button variant="contained" 
               className="input-field button  mb-4" 
-              type="submit">Sign up</Button>
+              type="submit"
+              disabled={isSubmitting}>{isSubmitting? "Signing up...": "Sign up"}</Button>
       
     </Form>
 
