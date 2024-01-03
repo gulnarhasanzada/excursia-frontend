@@ -7,11 +7,14 @@ import Login from './components/login/Login';
 import ErrorPage from './pages/Error';
 import Auth, {action as authAction} from './pages/Auth';
 import {action as logoutAction} from "./pages/Logout";
+import { tokenLoader } from './util/auth';
 
 const router = createBrowserRouter([
   {path: "/", 
    element: <Layout/>, 
    errorElement: <ErrorPage />,
+   id: "root",
+   loader: tokenLoader,
    children: [
       {index: true, element: <Home/>},
       {

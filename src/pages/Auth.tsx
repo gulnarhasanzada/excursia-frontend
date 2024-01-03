@@ -3,6 +3,7 @@ import Login from "../components/login/Login";
 import {json, redirect, useSearchParams} from "react-router-dom"
 import { API_URL } from "../config/config";
 import "./Auth.css"
+import { setAuthToken } from "../util/auth";
 
 const Auth = ()=>{
   const [searchParam] = useSearchParams();
@@ -64,7 +65,7 @@ export async function action({ request, params }: { request: Request, params: an
     if(mode === "login"){
         const resData = await response.json();
         const token = resData.token;
-        localStorage.setItem('token', token);
+        setAuthToken(token);
         return redirect('/')
     }else{
         return redirect('/auth?mode=login')
