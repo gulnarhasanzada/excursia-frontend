@@ -8,20 +8,9 @@ import ErrorMessage from "../../util/ErrorMessage";
 const Signup = ()=>{
   const navigation = useNavigation();
   const data: any = useActionData();
-  console.log(data)
   const isSubmitting = navigation.state === "submitting";
 
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const [firstnameErr, setFirstnameErr] = useState<string>("");
-  const [lastnameErr, setLastnameErr] = useState<string>("");
-  const [emailErr, setEmailErr] = useState<string>("");
-  const [phoneErr, setPhoneErr] = useState<string>("");
-  const [passwordErr, setPasswordErr] = useState<string>("");
-  const [error, setError] = useState<string>("");
-
-  const handleOnChange: MuiPhoneNumberProps["onChange"] = (value:any)=>{
-    setPhoneNumber(value.toString());
-  }
+  const handleOnChange: MuiPhoneNumberProps["onChange"] = (value:any)=>{}
   
   return (<>
     <Form method="post">
@@ -32,7 +21,7 @@ const Signup = ()=>{
                 className="input-field mb-4"
                 name="firstName"
       />
-      {data && <ErrorMessage errors={data.errors.firstName}/>}
+      {data && data.errors.firstName && <ErrorMessage errors={data.errors.firstName}/>}
     
       <TextField required
                 id="standard-basic"
@@ -41,7 +30,7 @@ const Signup = ()=>{
                 className="input-field  mb-4"
                 name="lastName"
       />
-      {data && <ErrorMessage errors={data.errors.lastName}/>}
+      {data && data.errors.lastName && <ErrorMessage errors={data.errors.lastName}/>}
 
       <TextField required
                 id="standard-basic"
@@ -50,7 +39,7 @@ const Signup = ()=>{
                 className="input-field mb-4"
                 name="email"
       />
-      {data && <ErrorMessage errors={data.errors.email}/>}
+      {data && data.errors.email && <ErrorMessage errors={data.errors.email}/>}
 
       <TextField required
                 id="standard-basic"
@@ -60,7 +49,7 @@ const Signup = ()=>{
                 name="password"
                 type="password"
       />
-      {data && <ErrorMessage errors={data.errors.password}/>}
+      {data && data.errors.password && <ErrorMessage errors={data.errors.password}/>}
       
       <MuiPhoneNumber required 
                       id="outlined-required" 
@@ -70,7 +59,7 @@ const Signup = ()=>{
                       onChange={handleOnChange}
                       className="input-field mb-4"
       />
-      {data && <ErrorMessage errors={data.errors.phoneNumber}/>}
+      {data && data.errors.phoneNumber && <ErrorMessage errors={data.errors.phoneNumber}/>}
       
       <Button variant="contained" 
               className="input-field button  mb-4" 

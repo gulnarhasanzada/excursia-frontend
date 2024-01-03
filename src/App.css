@@ -29,5 +29,4 @@ body {
 .error-message{
     font-size: 0.8rem;
     color: var(--primary-red);
-    margin-top: -1.5rem;
 }

@@ -50,8 +50,7 @@ export async function action({ request, params }: { request: Request, params: an
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(authData)
+        },        body: JSON.stringify(authData)
     }); 
 
     if(response.status === 422 || response.status === 401){  
@@ -62,6 +61,13 @@ export async function action({ request, params }: { request: Request, params: an
         throw json({message: "Could not authenticate user!" },{status: 500})
     }
 
-    return redirect('/auth?mode=login')
+    if(mode === "login"){
+        const resData = await response.json();
+        const token = resData.token;
+        localStorage.setItem('token', token);
+        return redirect('/')
+    }else{
+        return redirect('/auth?mode=login')
+    }
 }
 
