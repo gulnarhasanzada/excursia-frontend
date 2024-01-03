@@ -1,8 +1,9 @@
 import { Form, Link, useRouteLoaderData} from "react-router-dom";
 import { FaUserPlus } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
+import { PiSignOut } from "react-icons/pi";
 import "./header.css"
-import { Button } from "@mui/material";
+import { IconButton } from "@mui/material";
 
 const Header = ()=>{
     const token: any = useRouteLoaderData('root');
@@ -15,13 +16,10 @@ const Header = ()=>{
                 <div className="header-item">
 
                 </div>
-                <div className="header-item header-auth">       
+                <div className="header-item header-auth">  
+                    {token && <Form method="post" action="/logout"><IconButton aria-label="Sign out" type="submit" name="singout" title="Sign out"><PiSignOut/></IconButton></Form>}   
                     {!token && <Link to="/auth?mode=login" className="auth-link login"><FaUserCircle size="23" className="auth-icon"/>Login</Link>}
-                    <Link to="/auth?mode=signup" className="auth-link signup"><FaUserPlus size="23" className="auth-icon"/>Signup</Link>
-                    {token && 
-                    <Form method="post" action="/logout">
-                      <Button name="logout" type="submit"><FaUserPlus size="23" className="auth-icon"/>Logout</Button>
-                    </Form>}
+                    {!token && <Link to="/auth?mode=signup" className="auth-link signup"><FaUserPlus size="23" className="auth-icon"/>Signup</Link>}  
                 </div>
             </div>
         </header>

@@ -1,11 +1,22 @@
 import { Button, TextField } from "@mui/material";
-import { Form, Link, useActionData, useNavigation } from "react-router-dom";
+import { Form, Link, useActionData, useNavigate, useNavigation } from "react-router-dom";
 import ErrorMessage from "../../util/ErrorMessage";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../../util/useAuth";
 
 const Login = ()=>{
+    const isAuthenticated = useAuth();
     const navigation = useNavigation();
     const data: any = useActionData();
     const isSubmitting = navigation.state === "submitting";
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/');
+        }
+    }, [isAuthenticated]);
+
     return(<>
     {data && <ErrorMessage errors={[data.error]}/>}
     <Form method="post">
