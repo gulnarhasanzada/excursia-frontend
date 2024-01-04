@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import { Form, Link, useActionData, useNavigate, useNavigation } from "react-router-dom";
 import ErrorMessage from "../../util/ErrorMessage";
-import React, { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useAuth } from "../../util/useAuth";
 
 const Login = ()=>{
@@ -15,7 +15,7 @@ const Login = ()=>{
         if (isAuthenticated) {
             navigate('/');
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, navigate]);
 
     return(<>
     {data && <ErrorMessage errors={[data.error]}/>}

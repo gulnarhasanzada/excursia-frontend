@@ -12,7 +12,7 @@ const Auth = ()=>{
     
     <div className="row">
         <div className="col-sm-12 col-md-6 auth-page-img">
-            <img src="https://cdn.pixabay.com/photo/2019/07/08/04/23/traveling-4323759_960_720.png" alt="travel-photo-art" />
+            <img src="https://cdn.pixabay.com/photo/2019/07/08/04/23/traveling-4323759_960_720.png" alt="travel-art" />
         </div>
         <div className="col-sm-12 col-md-6 signup-container">
             <h2 className="mt-5">{isLogin ? "Login": "Sign up"}</h2>

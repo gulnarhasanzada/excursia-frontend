@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import MuiPhoneNumber, { MuiPhoneNumberProps } from "mui-phone-number";
 import "./Signup.css"
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { Form, Link,  useActionData,  useNavigate,  useNavigation} from 'react-router-dom';
 import ErrorMessage from "../../util/ErrorMessage";
 import { useAuth } from "../../util/useAuth";
@@ -17,7 +17,7 @@ const Signup = ()=>{
         if (isAuthenticated) {
             navigate('/');
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, navigate]);
 
 
   const handleOnChange: MuiPhoneNumberProps["onChange"] = (value:any)=>{}
