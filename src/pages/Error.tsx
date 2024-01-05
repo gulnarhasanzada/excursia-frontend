@@ -1,5 +1,5 @@
 import Footer from "../components/footer/footer";
-import Header from "../components/header/header";
+import Header from "../components/header/Header";
 
 const ErrorPage =  ()=>{
     return <div className="general-container">
