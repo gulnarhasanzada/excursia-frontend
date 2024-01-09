@@ -1,6 +1,7 @@
-import { Avatar, MenuItem, dividerClasses } from "@mui/material";
+import { Avatar, dividerClasses } from "@mui/material";
 import { useCallback, useState } from "react";
 import {AiOutlineMenu} from "react-icons/ai"
+import MenuItem from "./MenuItem";
 
 const UserMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,8 @@ const UserMenu = () => {
         <div className="absolute rounded-xl shadow-sm w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
             <div className="flex flex-col cursor-pointer">
                 <>
-                <MenuItem/>
+                <MenuItem label="Login" onClick={()=>{}}/>
+                <MenuItem label="Sign up" onClick={()=>{}}/>
                 </>
             </div>
         </div>}
