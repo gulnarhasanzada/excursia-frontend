@@ -1,9 +1,12 @@
-import { Avatar, dividerClasses } from "@mui/material";
+import { Avatar, Button, dividerClasses } from "@mui/material";
 import { useCallback, useState } from "react";
 import {AiOutlineMenu} from "react-icons/ai"
 import MenuItem from "./MenuItem";
+import { useAuth } from "../../util/useAuth";
+import { Form, useRouteLoaderData } from "react-router-dom";
 
 const UserMenu = () => {
+  const token: any = useRouteLoaderData('root');
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(()=>{
@@ -28,8 +31,14 @@ const UserMenu = () => {
         <div className="absolute rounded-xl shadow-sm w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
             <div className="flex flex-col cursor-pointer">
                 <>
-                <MenuItem label="Login" onClick={()=>{}}/>
-                <MenuItem label="Sign up" onClick={()=>{}}/>
+                {!token && <MenuItem label="Login" mode="/auth?mode=login" />}
+                {!token && <MenuItem label="Sign up" mode="/auth?mode=signup"/>}
+                {token && 
+                <Form method="post" action="/logout">
+                  <div className="px-4 py-3 hover:bg-neutral-100 transition font-semibold">
+                  <button name="logout" type="submit" className="bg-none">Logout</button>
+                  </div>
+                </Form>}
                 </>
             </div>
         </div>}

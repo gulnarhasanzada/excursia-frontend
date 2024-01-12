@@ -1,8 +1,9 @@
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { Form, Link, useActionData, useNavigate, useNavigation } from "react-router-dom";
 import ErrorMessage from "../../util/ErrorMessage";
 import { useEffect} from "react";
 import { useAuth } from "../../util/useAuth";
+import Button from "../Button";
 
 const Login = ()=>{
     const isAuthenticated = useAuth();
@@ -24,7 +25,7 @@ const Login = ()=>{
                 id="standard-basic"
                 label="Email" 
                 variant="standard"
-                className="input-field mb-4"
+                className="w-full mb-5"
                 name="email"
             />
 
@@ -32,19 +33,16 @@ const Login = ()=>{
               id="standard-basic"
               label="Password" 
               variant="standard"
-              className="input-field mb-4"
+              className="w-full mb-5"
               name="password"
               type="password"
     />
     
-    <Button variant="contained" 
-            className="input-field button  mb-4" 
-            type="submit"
-            disabled={isSubmitting}>{isSubmitting? "Loggin in...": "Log in"}</Button>
+    <Button label={isSubmitting? "Loggin in...": "Log in"} disabled={isSubmitting} type="submit"/>
     
   </Form>
 
-  <p className="mt-4">Don't have an account? <Link to="/auth?mode=signup" className="login-link">Signup</Link></p> 
+  <p className="text-semibold text-gray-900 my-3">Don't have an account? <Link to="/auth?mode=signup" className="ml-1 no-underline text-semibold text-sky-600">Signup</Link></p> 
   </>)
 }
 
