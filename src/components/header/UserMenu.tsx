@@ -34,11 +34,19 @@ const UserMenu = () => {
                 {!token && <MenuItem label="Login" mode="/auth?mode=login" />}
                 {!token && <MenuItem label="Sign up" mode="/auth?mode=signup"/>}
                 {token && 
+                <>
+                <MenuItem label="My trips" mode="/"/>
+                <MenuItem label="My favourites" mode="/"/>
+                <MenuItem label="My reservations" mode="/"/>
+                <MenuItem label="My properties" mode="/"/>
+                <MenuItem label="Excursia my home" mode="/"/>
+                <hr />
                 <Form method="post" action="/logout">
                   <div className="px-4 py-3 hover:bg-neutral-100 transition font-semibold">
                   <button name="logout" type="submit" className="bg-none">Logout</button>
                   </div>
-                </Form>}
+                </Form>
+                </>}
                 </>
             </div>
         </div>}

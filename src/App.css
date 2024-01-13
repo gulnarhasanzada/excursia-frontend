@@ -1,5 +1,4 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
-@import './colors.module.css';
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,200;6..12,400;6..12,700&display=swap');
 
   
@@ -10,24 +9,4 @@ body {
     padding: 0;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 1em;
-}
-
-.general-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-  
-.main-container {
-    flex: 1;
-    width: 80%;
-    margin:0 auto;
-}
-.button{
-    background-color: var(--primary-red) !important
-}
-
-.error-message{
-    font-size: 0.8rem;
-    color: var(--primary-red);
 }

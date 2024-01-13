@@ -14,13 +14,11 @@ const Auth = ()=>{
         <div className="md:shrink-0">
             <img src="https://cdn.pixabay.com/photo/2019/07/08/04/23/traveling-4323759_960_720.png" alt="travel-art" className="mt-3 h-60 w-full object-cover xl:h-full lg:w-100"/>
         </div>
-        <div className="flex flex-col xl:p-10">
+        <div className="flex flex-col xl:p-10 w-full">
             <h2 className="mt-4 mb-4">{isLogin ? "Login": "Sign up"}</h2>
             {!isLogin && <Signup />}
             {isLogin && <Login />}
-        </div>
-
-        
+        </div>    
     </div>
     </>)
 }

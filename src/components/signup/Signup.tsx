@@ -5,6 +5,7 @@ import { Form, Link,  useActionData,  useNavigate,  useNavigation} from 'react-r
 import ErrorMessage from "../../util/ErrorMessage";
 import { useAuth } from "../../util/useAuth";
 import Button from "../Button";
+import { AiFillGithub } from "react-icons/ai";
 
 const Signup = ()=>{
     const isAuthenticated = useAuth();

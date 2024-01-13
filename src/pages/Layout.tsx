@@ -24,9 +24,9 @@ const Layout = ()=>{
 
     }, [token, submit])
    
-    return(<div className="general-container">
+    return(<div className="flex flex-col h-screen">
                 <Header/>
-                <main className="main-container">
+                <main className="w-5/6 mr-auto ml-auto flex-1">
                     <Outlet />
                 </main> 
                 <Footer/>
