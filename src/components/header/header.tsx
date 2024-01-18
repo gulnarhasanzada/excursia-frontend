@@ -2,6 +2,7 @@ import { Link} from "react-router-dom";
 import Container from "../Container";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
+import Categories from "./Categories";
 
 const Header = ()=>{
     return (
@@ -15,6 +16,7 @@ const Header = ()=>{
                     </div>
                 </Container>
             </div>
+            <Categories />
         </header>
       )
 }
