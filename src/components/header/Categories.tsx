@@ -107,7 +107,7 @@ const Categories = () => {
     <Container>
         <div className="pt-4 flex flex-row items-center justify-between overflow-x-auto">
             {categories.map((category: Category)=>{
-                return <CategoryBox icon={category.icon} description={category.description} label={category.label}/>
+                return <CategoryBox icon={category.icon} description={category.description} label={category.label} key={category.label}/>
             })}
         </div>
     </Container>

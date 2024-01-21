@@ -32,7 +32,7 @@ const Login = ()=>{
         />
 
         <TextField required
-            id="standard-basic"
+            id="standard-basic1"
             label="Password" 
             variant="standard"
             className="w-full mb-5"
@@ -47,7 +47,7 @@ const Login = ()=>{
       <Button outline label="Continue with Google" icon={FcGoogle} type="submit"/>
       <Button outline label="Continue with Github" icon={AiFillGithub} type="submit"/>
     </div>
-    <p className="text-semibold text-gray-900 my-3">Don't have an account? <Link to="/auth?mode=signup" className="ml-1 no-underline text-semibold text-sky-600">Signup</Link></p> 
+    <p className="text-semibold text-gray-900 my-3">First time using Excursia? <Link to="/auth?mode=signup" className="ml-1 no-underline text-semibold text-sky-600">Create an account</Link></p> 
   </>)
 }
 
