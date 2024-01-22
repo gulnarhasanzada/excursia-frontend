@@ -8,6 +8,7 @@ import ErrorPage from './pages/Error';
 import Auth, {action as authAction} from './pages/Auth';
 import {action as logoutAction} from "./pages/Logout";
 import { checkAuthLoader, tokenLoader } from './util/auth';
+import Rent from './components/rent/Rent';
 
 const router = createBrowserRouter([
   {path: "/", 
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
         path: "user",
         loader: checkAuthLoader,
         element: <Home/>
+      },
+      {
+        path: "rent",
+        element: <Rent/>
       }
    ]
   }

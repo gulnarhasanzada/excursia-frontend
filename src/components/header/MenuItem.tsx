@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 interface MenuItemsProps {
     label: string,
     mode: string,
-    type?: "submit" | "reset" | "button" | undefined;
+    type?: "submit" | "reset" | "button" | undefined,
+    onClick?: ()=>void
 }
 const MenuItem: React.FC<MenuItemsProps> = ({ mode, label}) => {
   return (

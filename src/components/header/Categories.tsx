@@ -17,7 +17,7 @@ import Container from "../Container";
 import CategoryBox from './CategoryBox';
 import { IconType } from 'react-icons';
 
-interface Category{
+export interface Category{
     icon: IconType;
     label: string;
     selected?: boolean;

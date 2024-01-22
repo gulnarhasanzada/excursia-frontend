@@ -1,25 +1,30 @@
-import { Avatar, Button, dividerClasses } from "@mui/material";
+import { Avatar} from "@mui/material";
 import { useCallback, useState } from "react";
 import {AiOutlineMenu} from "react-icons/ai"
 import MenuItem from "./MenuItem";
-import { useAuth } from "../../util/useAuth";
-import { Form, useRouteLoaderData } from "react-router-dom";
+import { Form, Link, useNavigate, useRouteLoaderData } from "react-router-dom";
 
 const UserMenu = () => {
   const token: any = useRouteLoaderData('root');
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = useCallback(()=>{
     setIsOpen((value) => !value)
   }, [])
+
+  const onRent = useCallback(()=>{
+    if(!token){
+      return navigate("/auth?mode=login");
+    }
+  }, [token])
   
   return (
     <div className="relative">
       <div className="flex flex-row items-center gap-3">
-        <div onClick={()=>{}}
-             className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
+        <Link to ="/rent" className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full no-underline text-neutral-800 hover:bg-neutral-100 transition cursor-pointer">
               Book your stay
-        </div>
+        </Link>
         <div onClick={toggleOpen}
              className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-sm transition">
             <AiOutlineMenu />
@@ -39,7 +44,7 @@ const UserMenu = () => {
                 <MenuItem label="My favourites" mode="/"/>
                 <MenuItem label="My reservations" mode="/"/>
                 <MenuItem label="My properties" mode="/"/>
-                <MenuItem label="Excursia my home" mode="/"/>
+                <MenuItem label="Excursia my home" mode="/rent"/>
                 <hr />
                 <Form method="post" action="/logout">
                   <div className="px-4 py-3 hover:bg-neutral-100 transition font-semibold">
