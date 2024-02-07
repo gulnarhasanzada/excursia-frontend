@@ -31,10 +31,6 @@ const router = createBrowserRouter([
         path: "user",
         loader: checkAuthLoader,
         element: <Home/>
-      },
-      {
-        path: "rent",
-        element: <Rent/>
       }
    ]
   }

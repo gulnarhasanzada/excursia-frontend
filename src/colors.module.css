@@ -1,8 +1,8 @@
 /* styles/colors.module.css */
 :root {
-    --primary-red: #FF385C;
+    --primary-blue: #38BDF8;
     --primary-grey: #EBEBEB;
     --text-color: #232323;
-    --icon-color: #717171;
+    --grey-color: #717171;
     --background-color: #fff;
   }

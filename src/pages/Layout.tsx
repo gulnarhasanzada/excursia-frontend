@@ -3,6 +3,8 @@ import Footer from "../components/footer/footer";
 import Header from "../components/header/Header";
 import { useEffect } from "react";
 import { getTokenDuration } from "../util/auth";
+import RentModal from "../components/modals/RentModal";
+import Modal from "../components/modals/Modal";
 
 const Layout = ()=>{
     const token: any  = useLoaderData();
@@ -25,6 +27,7 @@ const Layout = ()=>{
     }, [token, submit])
    
     return(<div className="flex flex-col h-screen">
+                <RentModal/>
                 <Header/>
                 <main className="w-5/6 mr-auto ml-auto flex-1">
                     <Outlet />
