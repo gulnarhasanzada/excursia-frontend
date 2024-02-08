@@ -9,7 +9,7 @@ const UserMenu = () => {
   const token: any = useRouteLoaderData('root');
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const rentModal = useRentModal(); 
+  const rentModal = useRentModal();
   
   const toggleOpen = useCallback(()=>{
     setIsOpen((value) => !value)
@@ -40,7 +40,7 @@ const UserMenu = () => {
         <div className="absolute rounded-xl shadow-sm w-[40vw] md:w-3/4 bg-white overflow-hidden right-0 top-12 text-sm">
             <div className="flex flex-col cursor-pointer">
                 <>
-                {!token && <MenuItem label="Login" mode="/auth?mode=login" />}
+                {!token && <MenuItem label="Login" mode="/auth?mode=login"/>}
                 {!token && <MenuItem label="Sign up" mode="/auth?mode=signup"/>}
                 {token && 
                 <>
@@ -48,7 +48,7 @@ const UserMenu = () => {
                 <MenuItem label="My favourites" mode="/"/>
                 <MenuItem label="My reservations" mode="/"/>
                 <MenuItem label="My properties" mode="/"/>
-                <MenuItem label="Rent my home" mode="/rent"/>
+                <div className="px-4 py-3 hover:bg-neutral-100 transition font-semibold" onClick={onRent}>Rent my home</div>
                 <hr />
                 <Form method="post" action="/logout">
                   <div className="px-4 py-3 hover:bg-neutral-100 transition font-semibold">

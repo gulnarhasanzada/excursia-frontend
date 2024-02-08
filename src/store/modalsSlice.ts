@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const modalsSlice = createSlice({
     name:'modals',
-    initialState: { isOpen: false },
+    initialState: { isOpen: false},
     reducers: {
         openRentModal(state){
             state.isOpen = true;
