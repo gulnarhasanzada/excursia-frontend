@@ -5,7 +5,8 @@ import ReactDOM from "react-dom";
 import CategoryInput from "../inputs/CategoryInput";
 import { Category, categories } from "../header/Categories";
 import Heading from "../Heading";
-import Button from "../Button";
+import {useForm} from "react-hook-form"
+
 enum STEPS {
   CATEGORY = 0,
   LOCATION = 1,
@@ -40,7 +41,7 @@ const LoginModal = () => {
     if(step === STEPS.CATEGORY){
         return undefined;
     }
-    return "Next";
+    return "Prev";
   }, [step])
 
   let content = (
@@ -57,7 +58,6 @@ const LoginModal = () => {
                      />
                 </div>))}
         </div>
-        <Button label={actionLabel} type="submit"/> 
     </div>
   );
 
@@ -65,7 +65,9 @@ const LoginModal = () => {
     <Modal isOpen={rentModal.isOpen}
            onClose={rentModal.onClose}
            onSubmit={rentModal.onClose}
-           actionLabel="Submit"
+           actionLabel={actionLabel}
+           secondaryActionLabel={secondaryActionLabel}
+           secondaryAction={step===STEPS.CATEGORY ? undefined : onPrev}
            body={content}
            title="Rent your home!"
            />, document.getElementById('portal-root') as Element);
