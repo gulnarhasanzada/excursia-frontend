@@ -1,11 +1,12 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react"
 import Modal from "./Modal";
 import useRentModal from "../../hooks/useRentModal";
 import ReactDOM from "react-dom";
 import CategoryInput from "../inputs/CategoryInput";
 import { Category, categories } from "../header/Categories";
 import Heading from "../Heading";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form"
+import CountrySelect from "../inputs/CountrySelect";
 
 enum STEPS {
   CATEGORY = 0,
@@ -98,11 +99,23 @@ const LoginModal = () => {
     </div>
   );
 
+  if(step === STEPS.LOCATION){
+    content = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Where is your place located?"
+          subtitle="Help guests find you!"
+        />
+        <CountrySelect />
+      </div>
+    )
+  }
+
   return ReactDOM.createPortal(
     <Modal
       isOpen={rentModal.isOpen}
       onClose={rentModal.onClose}
-      onSubmit={rentModal.onClose}
+      onSubmit={onNext}
       actionLabel={actionLabel}
       secondaryActionLabel={secondaryActionLabel}
       secondaryAction={step === STEPS.CATEGORY ? undefined : onPrev}
