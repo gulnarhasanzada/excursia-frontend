@@ -7,7 +7,6 @@ import Auth, {action as authAction} from './pages/Auth';
 import {action as logoutAction} from "./pages/Logout";
 import { checkAuthLoader, tokenLoader } from './util/auth';
 
-
 const router = createBrowserRouter([
   {path: "/", 
    element: <Layout/>, 
