@@ -1,7 +1,7 @@
 import Signup from "../components/signup/Signup";
 import Login from "../components/login/Login";
 import {json, redirect, useSearchParams} from "react-router-dom"
-import { API_URL } from "../config/config";
+require("dotenv").config({path: "config/keys.env"});
 import "./Auth.css"
 import { setAuthToken } from "../util/auth";
 import Heading from "../components/Heading";
@@ -48,7 +48,7 @@ export async function action({ request, params }: { request: Request, params: an
         throw json({message: "Unsupportted mode." },{status: 422})
     }
     
-    const response = await fetch(API_URL+ "/user/" + mode, {
+    const response = await fetch(process.env.API_URL+ "/user/" + mode, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
