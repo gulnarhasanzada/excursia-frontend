@@ -28,9 +28,9 @@ const useCountries = () => {
         }
       };
 
-      fetchCountries(); // Immediately fetch countries on component mount
+      fetchCountries();
 
-    }, []); // Empty dependency array means this effect runs only once after the initial render
+    }, []); 
   
     const getAll:any = ()=> countries;
 

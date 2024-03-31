@@ -1,11 +1,11 @@
-import React, { useMemo, useState } from "react"
+import React, { Suspense, useMemo, useState, lazy, useEffect } from "react";
 import Modal from "./Modal";
 import useRentModal from "../../hooks/useRentModal";
 import ReactDOM from "react-dom";
 import CategoryInput from "../inputs/CategoryInput";
 import { Category, categories } from "../header/Categories";
 import Heading from "../Heading";
-import { FieldValues, useForm } from "react-hook-form"
+import { FieldValues, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
 
 enum STEPS {
@@ -23,9 +23,12 @@ type FormFields = {
   guestCount: number;
 };
 
+const Map = lazy(() => import("../Map"));
+
 const LoginModal = () => {
   const rentModal = useRentModal();
   const [step, setStep] = useState(STEPS.CATEGORY);
+  const [isMapLoaded, setIsMapLoaded] = useState(false); 
 
   const {
     register,
@@ -47,14 +50,24 @@ const LoginModal = () => {
     },
   });
   const category = watch("category");
+  const location = watch("location");
 
-  const setCustomValue = (id: string, value: any) =>{
+  const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldDirty: true,
       shouldTouch: true,
-      shouldValidate: true
-    })  
-  }
+      shouldValidate: true,
+    });
+  };
+
+  useEffect(() => {
+    if (location) {
+      setIsMapLoaded(true);
+    }else{
+      setIsMapLoaded(false);
+    }
+  }, [location]); 
+
 
   const onPrev = () => {
     setStep((value) => value - 1);
@@ -88,7 +101,7 @@ const LoginModal = () => {
         {categories.map((item: Category) => (
           <div className="col-span-1" key={item.label}>
             <CategoryInput
-              onClick={(category) => setCustomValue('category', category)}
+              onClick={(category) => setCustomValue("category", category)}
               selected={category === item.label}
               label={item.label}
               icon={item.icon}
@@ -99,16 +112,24 @@ const LoginModal = () => {
     </div>
   );
 
-  if(step === STEPS.LOCATION){
+  if (step === STEPS.LOCATION) {
     content = (
       <div className="flex flex-col gap-8">
         <Heading
           title="Where is your place located?"
           subtitle="Help guests find you!"
         />
-        <CountrySelect />
+        <CountrySelect
+          value={location}
+          onChange={(value) => setCustomValue("location", value)}
+        />
+        {isMapLoaded && ( 
+        <Suspense fallback={<div>Loading...</div>}>
+          <Map center={location?.latlng} />
+        </Suspense>
+        )}
       </div>
-    )
+    );
   }
 
   return ReactDOM.createPortal(

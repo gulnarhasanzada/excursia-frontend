@@ -46,7 +46,7 @@ export async function action({ request, params }: { request: Request, params: an
     }else{
         throw json({message: "Unsupportted mode." },{status: 422})
     }
-    console.log(process.env.REACT_APP_API_URL)
+
     const response = await fetch(process.env.REACT_APP_API_URL+ "/user/" + mode, {
         method: 'POST',
         headers: {
