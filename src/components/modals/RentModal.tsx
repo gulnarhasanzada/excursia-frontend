@@ -7,6 +7,7 @@ import { Category, categories } from "../header/Categories";
 import Heading from "../Heading";
 import { FieldValues, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
+import Counter from "../inputs/Counter";
 
 enum STEPS {
   CATEGORY = 0,
@@ -16,12 +17,6 @@ enum STEPS {
   DESCRIPTION = 4,
   PRICE = 5,
 }
-
-type FormFields = {
-  category: string;
-  location: {};
-  guestCount: number;
-};
 
 const Map = lazy(() => import("../Map"));
 
@@ -43,7 +38,11 @@ const LoginModal = () => {
       category: "",
       description: "",
       location: null,
-      capacity: null,
+      capacity: {
+        guests: 1,
+        bedrooms: 1,
+        bathrooms: 1
+      },
       amenities: [],
       images: [],
       price: null,
@@ -51,6 +50,10 @@ const LoginModal = () => {
   });
   const category = watch("category");
   const location = watch("location");
+  const guestCount = watch('capacity.guests')
+  const bedroomCount = watch('capacity.bedrooms') 
+  const bathroomCount = watch('capacity.bathrooms')
+
 
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
@@ -130,6 +133,37 @@ const LoginModal = () => {
         )}
       </div>
     );
+  }
+  
+  if(step === STEPS.INFO){
+    content = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Share some basics about your place"
+          subtitle="What amenities do you have?"
+        />
+        <Counter 
+          title="Guests"
+          subtitle="How many guests do you allow?"
+          value={guestCount}
+          onChange={(value)=>setCustomValue('capacity.guests', value)}
+        />
+        <hr />
+        <Counter 
+          title="Bedrooms"
+          subtitle="How many bedrooms do you have?"
+          value={bedroomCount}
+          onChange={(value)=>setCustomValue('capacity.bedrooms', value)}
+        />
+        <hr />
+        <Counter 
+          title="Bathrooms"
+          subtitle="How many bathrooms do you have?"
+          value={bathroomCount}
+          onChange={(value)=>setCustomValue('capacity.bathrooms', value)}
+        />
+      </div>
+    )
   }
 
   return ReactDOM.createPortal(
