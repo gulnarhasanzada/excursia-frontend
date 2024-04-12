@@ -8,14 +8,17 @@ import Heading from "../Heading";
 import { FieldValues, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
 import Counter from "../inputs/Counter";
+import {amenities, Amenity} from "../inputs/Amenities";
+import AmenityBox from "../inputs/AmenityBox";
 
 enum STEPS {
   CATEGORY = 0,
   LOCATION = 1,
   INFO = 2,
-  IMAGES = 3,
-  DESCRIPTION = 4,
-  PRICE = 5,
+  AMENITIES = 3,
+  IMAGES = 4,
+  DESCRIPTION = 5,
+  PRICE = 6,
 }
 
 const Map = lazy(() => import("../Map"));
@@ -41,7 +44,8 @@ const LoginModal = () => {
       capacity: {
         guests: 1,
         bedrooms: 1,
-        bathrooms: 1
+        bathrooms: 1,
+        beds: 1,
       },
       amenities: [],
       images: [],
@@ -52,6 +56,7 @@ const LoginModal = () => {
   const location = watch("location");
   const guestCount = watch('capacity.guests')
   const bedroomCount = watch('capacity.bedrooms') 
+  const bedsCount = watch('capacity.beds') 
   const bathroomCount = watch('capacity.bathrooms')
 
 
@@ -134,13 +139,32 @@ const LoginModal = () => {
       </div>
     );
   }
+
+  if(step === STEPS.AMENITIES){
+    content = (
+      <div className="flex flex-col gap-8">
+        <Heading
+          title="Tell guests what your place has to offer"
+          subtitle="You can add more amenities after you publish your listing."
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
+            {amenities.map((amenity: Amenity, index:number)=>{
+                const {selected, label, icon} = amenity;
+                return (<div className="col-span-1" key={label}><AmenityBox icon={icon} label={label} selected={selected} onClick={(label)=>{}}/></div>
+          )
+            })}
+        </div>
+        <hr />
+      </div>
+    )
+  }
   
   if(step === STEPS.INFO){
     content = (
       <div className="flex flex-col gap-8">
         <Heading
           title="Share some basics about your place"
-          subtitle="What amenities do you have?"
+          subtitle="How many rooms do you have?"
         />
         <Counter 
           title="Guests"
@@ -154,6 +178,13 @@ const LoginModal = () => {
           subtitle="How many bedrooms do you have?"
           value={bedroomCount}
           onChange={(value)=>setCustomValue('capacity.bedrooms', value)}
+        />
+        <hr />
+        <Counter 
+          title="Beds"
+          subtitle="How many beds do you have?"
+          value={bedsCount}
+          onChange={(value)=>setCustomValue('capacity.beds', value)}
         />
         <hr />
         <Counter 
