@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo, useState, lazy, useEffect } from "react";
+import React, { Suspense, useMemo, useState, lazy, useEffect, useCallback } from "react";
 import Modal from "./Modal";
 import useRentModal from "../../hooks/useRentModal";
 import ReactDOM from "react-dom";
@@ -8,7 +8,7 @@ import Heading from "../Heading";
 import { FieldValues, useForm } from "react-hook-form";
 import CountrySelect from "../inputs/CountrySelect";
 import Counter from "../inputs/Counter";
-import {amenities, Amenity} from "../inputs/Amenities";
+import {amenities as amenityList, Amenity, amenities} from "../inputs/Amenities";
 import AmenityBox from "../inputs/AmenityBox";
 
 enum STEPS {
@@ -67,6 +67,23 @@ const LoginModal = () => {
       shouldValidate: true,
     });
   };
+
+  const handleAmenityClick = useCallback((amenity: Amenity) => {
+    const currentAmenities = watch("amenities") || [];
+    const isAmenitySelected = currentAmenities.includes(amenity.label);
+
+    if (isAmenitySelected) {
+      // Remove amenity if already selected
+      const updatedAmenities = currentAmenities.filter((item: string) => item !== amenity.label);
+      setCustomValue("amenities", updatedAmenities);
+      console.log(updatedAmenities)
+    } else {
+      // Add amenity if not selected
+      const updatedAmenities = [...currentAmenities, amenity.label];
+      setCustomValue("amenities", updatedAmenities);
+    }
+   
+  }, [watch, setCustomValue]);
 
   useEffect(() => {
     if (location) {
@@ -148,9 +165,10 @@ const LoginModal = () => {
           subtitle="You can add more amenities after you publish your listing."
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[50vh] overflow-y-auto">
-            {amenities.map((amenity: Amenity, index:number)=>{
+            {amenityList.map((amenity: Amenity, index:number)=>{
                 const {selected, label, icon} = amenity;
-                return (<div className="col-span-1" key={label}><AmenityBox icon={icon} label={label} selected={selected} onClick={(label)=>{}}/></div>
+                const isSelected = (watch("amenities") || []).includes(label);
+                return (<div className="col-span-1" key={label}><AmenityBox icon={icon} label={label} selected={isSelected} onClick={() => handleAmenityClick(amenity)}/></div>
           )
             })}
         </div>
