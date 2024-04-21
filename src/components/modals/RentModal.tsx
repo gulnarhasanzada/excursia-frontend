@@ -10,6 +10,7 @@ import CountrySelect from "../inputs/CountrySelect";
 import Counter from "../inputs/Counter";
 import {amenities as amenityList, Amenity, amenities} from "../inputs/Amenities";
 import AmenityBox from "../inputs/AmenityBox";
+import ImageUpload from "../inputs/ImageUpload";
 
 enum STEPS {
   CATEGORY = 0,
@@ -58,6 +59,7 @@ const LoginModal = () => {
   const bedroomCount = watch('capacity.bedrooms') 
   const bedsCount = watch('capacity.beds') 
   const bathroomCount = watch('capacity.bathrooms')
+  const images = watch('images')
 
 
   const setCustomValue = (id: string, value: any) => {
@@ -76,13 +78,18 @@ const LoginModal = () => {
       // Remove amenity if already selected
       const updatedAmenities = currentAmenities.filter((item: string) => item !== amenity.label);
       setCustomValue("amenities", updatedAmenities);
-      console.log(updatedAmenities)
     } else {
       // Add amenity if not selected
       const updatedAmenities = [...currentAmenities, amenity.label];
       setCustomValue("amenities", updatedAmenities);
     }
    
+  }, [watch, setCustomValue]);
+
+  const handleImageUpload = useCallback((image: string) => {
+    const currentImages = watch("images") || [];
+    const updatedImages = [...currentImages, image];
+    setCustomValue("images", updatedImages);
   }, [watch, setCustomValue]);
 
   useEffect(() => {
@@ -211,6 +218,18 @@ const LoginModal = () => {
           value={bathroomCount}
           onChange={(value)=>setCustomValue('capacity.bathrooms', value)}
         />
+      </div>
+    )
+  }
+
+  if(step === STEPS.IMAGES){
+    content = (
+      <div className="flex flex-col gap-8">
+        <Heading 
+          title="Add photos of your place"
+          subtitle="Show guests what your place looks like!"
+        />
+        <ImageUpload values={images} onChange={(image:string)=>{handleImageUpload(image)}}/>
       </div>
     )
   }
