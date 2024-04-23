@@ -21,8 +21,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ onChange, values}) => {
     if (cloudinaryRef.current) {
         widgetRef.current = cloudinaryRef.current.createUploadWidget(
           {
-            cloudName: 'dct74kjje',
-            uploadPreset: 'xvwbtbta'
+            cloudName: process.env.PUBLIC_CLOUDINARY_CLOUD_NAME,
+            uploadPreset: process.env.PUBLIC_CLOUDINARY_UPLOAD_PRESET
           },
           (error: any, result: any) => {
             if(result.info.secure_url){

@@ -11,6 +11,7 @@ import Counter from "../inputs/Counter";
 import {amenities as amenityList, Amenity, amenities} from "../inputs/Amenities";
 import AmenityBox from "../inputs/AmenityBox";
 import ImageUpload from "../inputs/ImageUpload";
+import Input from "../inputs/Input";
 
 enum STEPS {
   CATEGORY = 0,
@@ -28,6 +29,7 @@ const LoginModal = () => {
   const rentModal = useRentModal();
   const [step, setStep] = useState(STEPS.CATEGORY);
   const [isMapLoaded, setIsMapLoaded] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false); 
 
   const {
     register,
@@ -60,8 +62,9 @@ const LoginModal = () => {
   const bedsCount = watch('capacity.beds') 
   const bathroomCount = watch('capacity.bathrooms')
   const images = watch('images')
-
-
+  const title = watch("title");
+  const description = watch("description");
+  
   const setCustomValue = (id: string, value: any) => {
     setValue(id, value, {
       shouldDirty: true,
@@ -230,6 +233,34 @@ const LoginModal = () => {
           subtitle="Show guests what your place looks like!"
         />
         <ImageUpload values={images} onChange={(image:string)=>{handleImageUpload(image)}}/>
+      </div>
+    )
+  }
+
+  if(step === STEPS.DESCRIPTION){
+    content = (
+      <div className="flex flex-col gap-8">
+        <Heading 
+          title="How would you describe your place?"
+          subtitle="Short and sweet works best!"
+        />
+        <Input
+          id="title"
+          label= "Title"
+          disabled={isLoading}
+          value={title}
+          register={register}
+          errors={errors}
+          required />
+        <hr />
+        <Input
+          id="description"
+          label= "Description"
+          value={description}
+          disabled={isLoading}
+          register={register}
+          errors={errors}
+          required />
       </div>
     )
   }
